@@ -1,0 +1,53 @@
+# dockerfiles/docker-compose.yml
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ../mixo-frontend
+      dockerfile: ../dockerfiles/MixoFrontend/Dockerfile
+    volumes:
+      - ../mixo-frontend:/app
+      - /app/node_modules # Excluye node_modules del volumen
+    ports:
+      - "3000:3000" # Mapea el puerto 3000 externo al 3000 interno
+    stdin_open: true
+    tty: true
+    networks:
+      test:
+        ipv4_address: 10.18.0.2
+
+  backend:
+    build:
+      context: ../mixo-backend
+      dockerfile: ../dockerfiles/MixoBackend/Dockerfile
+    volumes:
+      - ../mixo-backend:/app
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mixo
+    expose:
+      - "9001"
+    networks:
+      test:
+        ipv4_address: 10.18.0.3
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      test:
+        ipv4_address: 10.18.0.4
+
+volumes:
+  mongo-data:
+
+networks:
+  test:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.18.0.0/16
