@@ -1,4 +1,3 @@
-# dockerfiles/docker-compose.yml
 version: "3.8"
 
 services:
@@ -8,9 +7,9 @@ services:
       dockerfile: ../dockerfiles/MixoFrontend/Dockerfile
     volumes:
       - ../mixo-frontend:/app
-      - /app/node_modules # Excluye node_modules del volumen
+      - /app/node_modules
     ports:
-      - "3000:3000" # Mapea el puerto 3000 externo al 3000 interno
+      - "3000:3000"
     stdin_open: true
     tty: true
     networks:
