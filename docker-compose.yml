@@ -16,10 +16,10 @@ services:
 
   backend:
     build:
-      context: /home/raul/Documents/GitProjects/TradeIt-backend
-      dockerfile: /home/raul/Documents/GitProjects/dockerfiles/DockersReact-Node/TradeItBackend/Dockerfile
+      context: ../TradeItNode
+      dockerfile: ../DockersReact-Node/TradeItBackend/Dockerfile
     volumes:
-      - /home/raul/Documents/GitProjects/TradeIt-backend:/app
+      - ../TradeItNode:/app
     environment:
       - MONGO_URI=mongodb://mongo:27017/TradeIt
     expose:
