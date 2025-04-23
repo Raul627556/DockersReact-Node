@@ -1,29 +1,29 @@
-version: "3.8"
-
 services:
   frontend:
     build:
-      context: ../mixo-frontend
-      dockerfile: ../dockerfiles/MixoFrontend/Dockerfile
+      context: /home/raul/Documents/GitProjects/TradeIt-frontend
+      dockerfile: /home/raul/Documents/GitProjects/dockerfiles/DockersReact-Node/TradeItFrontend/Dockerfile
     volumes:
-      - ../mixo-frontend:/app
+      - /home/raul/Documents/GitProjects/TradeIt-frontend:/app
       - /app/node_modules
     ports:
       - "3000:3000"
     stdin_open: true
     tty: true
+    environment:
+    - HOST=0.0.0.0
     networks:
       test:
         ipv4_address: 10.18.0.2
 
   backend:
     build:
-      context: ../mixo-backend
-      dockerfile: ../dockerfiles/MixoBackend/Dockerfile
+      context: /home/raul/Documents/GitProjects/TradeIt-backend
+      dockerfile: /home/raul/Documents/GitProjects/dockerfiles/DockersReact-Node/TradeItBackend/Dockerfile
     volumes:
-      - ../mixo-backend:/app
+      - /home/raul/Documents/GitProjects/TradeIt-backend:/app
     environment:
-      - MONGO_URI=mongodb://mongo:27017/mixo
+      - MONGO_URI=mongodb://mongo:27017/TradeIt
     expose:
       - "9001"
     networks:
