@@ -7,7 +7,6 @@ RUN npm install
 
 RUN npm install -g nodemon
 
-
 COPY . .
 
 EXPOSE 80
