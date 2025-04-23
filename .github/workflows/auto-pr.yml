@@ -9,6 +9,9 @@ jobs:
   create-pull-request:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout código del repo
+        uses: actions/checkout@v3
+
       - name: Crear Pull Request automático a master
         uses: repo-sync/pull-request@v2
         with:
