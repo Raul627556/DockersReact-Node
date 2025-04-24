@@ -5,11 +5,11 @@ services:
       dockerfile: ../DockersReact-Node/TradeItMobile/Dockerfile
     volumes:
         - ../TradeItMobile:/app
-        - /app/node_modules
     ports:
         - "19000:19000"  # puerto principal de expo
         - "19001:19001"  # WebSocket de desarrollo
         - "19002:19002"  # Interfaz web de metro bundler
+        - "19006:19006"
     stdin_open: true
     tty: true
     environment:

@@ -1,7 +1,7 @@
 # Usa una imagen base oficial de Node
 FROM node:18
 
-# Instala dependencias necesarias para React Native + Expo
+# Instala dependencias necesarias del sistema
 RUN apt-get update && apt-get install -y \
   git \
   python3 \
@@ -10,15 +10,23 @@ RUN apt-get update && apt-get install -y \
   default-jdk \
   && rm -rf /var/lib/apt/lists/*
 
-
-# Crea directorio de trabajo
+# Crea el directorio de trabajo
 WORKDIR /app
 
-# Instala expo-cli de forma global
+# Copia solo los archivos de dependencias
+COPY package*.json ./
+
+# Instala Expo CLI globalmente
 RUN npm install -g expo-cli
 
-# Expone el puerto para desarrollo de Expo
-EXPOSE 19000 19001 19002
+# Instala dependencias locales (solo si no montas volumen, si no, lo hace CMD)
+# RUN npm install
 
-# Punto de entrada por defecto al iniciar el contenedor
-CMD ["bash"]
+# Copia el resto del código (opcional si montas volumen en docker-compose)
+# COPY . .
+
+# Expone puertos para Expo Web (19006)
+EXPOSE 19006
+
+# Comando para instalar dependencias y lanzar modo web
+CMD ["sh", "-c", "npm install && npm run web"]
