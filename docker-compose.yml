@@ -1,27 +1,28 @@
 services:
   frontend:
     build:
-      context: /home/raul/Documents/GitProjects/TradeIt-frontend
-      dockerfile: /home/raul/Documents/GitProjects/dockerfiles/DockersReact-Node/TradeItFrontend/Dockerfile
+      context: ../TradeItMobile
+      dockerfile: ../DockersReact-Node/TradeItMobile/Dockerfile
     volumes:
-      - /home/raul/Documents/GitProjects/TradeIt-frontend:/app
-      - /app/node_modules
+        - ../TradeItMobile:/app
+        - /app/node_modules
     ports:
-      - "3000:3000"
+        - "19000:19000"  # puerto principal de expo
+        - "19001:19001"  # WebSocket de desarrollo
+        - "19002:19002"  # Interfaz web de metro bundler
     stdin_open: true
     tty: true
     environment:
-    - HOST=0.0.0.0
+      - HOST=0.0.0.0
     networks:
       test:
         ipv4_address: 10.18.0.2
-
   backend:
     build:
-      context: /home/raul/Documents/GitProjects/TradeIt-backend
-      dockerfile: /home/raul/Documents/GitProjects/dockerfiles/DockersReact-Node/TradeItBackend/Dockerfile
+      context: ../TradeIt-backend
+      dockerfile: ../DockersReact-Node/TradeItBackend/Dockerfile
     volumes:
-      - /home/raul/Documents/GitProjects/TradeIt-backend:/app
+      - ../TradeIt-backend:/app
     environment:
       - MONGO_URI=mongodb://mongo:27017/TradeIt
     expose:
