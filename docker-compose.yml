@@ -7,9 +7,9 @@ services:
       - ../TradeIt-backend:/app
     environment:
       - MONGO_URI=mongodb://mongo:27017/TradeIt
-      - PORT=9001
+      - PORT=80
     expose:
-      - "9001"
+      - "80"
     networks:
       test:
         ipv4_address: 10.18.0.3
