@@ -8,6 +8,12 @@ services:
     environment:
       - MONGO_URI=mongodb://mongo:27017/TradeIt
       - PORT=80
+      - NODE_ENV=development
+      - BCRYPT_SALT_ROUNDS=10
+      - JWT_SECRET=76af676837ee22d9ac417569f6c309ce7c7261c2a138a0518f0cfba536d17c9a
+      - JWT_REFRESH_SECRET=d24b0dfea9cf87451c60d47e0ac2913b0d9ef3d2ac85f7917e4fa8ad3db6f79e
+      - ACCESS_TOKEN_EXPIRES_IN=1h
+      - REFRESH_TOKEN_EXPIRES_IN=1h
     expose:
       - "80"
     networks:
